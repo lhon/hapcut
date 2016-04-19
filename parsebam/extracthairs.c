@@ -145,7 +145,8 @@ int parse_bamfile_sorted(char* bamfile,HASHTABLE* ht,CHROMVARS* chromvars,VARIAN
 		else chrom = prevchrom;
 		if (read->tid == read->mtid)  // use mateposition to calculate insert size, march 12 2013, wrong since we need to consider the readlength/cigar
 		{
-			//read->IS = read->mateposition - read->position; 
+			// paired-end needs a non-zero value
+            read->IS = read->mateposition - read->position; 
 		}
 
 		absIS = (read->IS < 0) ? -1*read->IS: read->IS; 
